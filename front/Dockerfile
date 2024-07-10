@@ -18,8 +18,3 @@ EXPOSE 5173
 
 # demarrer l'application: node server.js
 CMD ["npm","run","dev"]
-
-
-
-
-

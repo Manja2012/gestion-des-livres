@@ -1,63 +1,73 @@
 services:
 
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: nginx
-  #   volumes:
-  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-  #   ports:
-  #     - 8181:81
-  #   depends_on:
-  #     - node 
-  #     - frontend
-
   node:
     build: 
       context: ./back
+    container_name: back
     volumes:
       - ./back:/usr/src/app
     ports:
       - 8080:8080
-    deploy:
-      resources:
-        reservations:
-          cpus: '0.25' # reservation minimale de CPU
-          memory: '800M' # reservation minimale de memoir
-   
 
   frontend:
     build: 
-      context: ./front
-    container_name: frontend
+      context: ./app-react
+    container_name: app-react
     volumes:
-      - ./front:/usr/src/app
+      - ./app-react:/usr/src/app
     ports:
       - 5173:5173
     deploy:
       resources:
         limits:
-          cpus: '0.10' # limit maximale de CPU
-          memory: '512m'  # limit maximale de memoire\
+          cpus: 0.5
+          memory: 512M
+        reservations:
+          cpus: 0.25
+          memory: 128M
 
-volumes:
-  backend:
-  frontend:
 
-# Mode Garantis  
 
-# c'est lorsque la valeur minimale et la valeur maximale on le meme valeur
-  deploy:
-    resources:
-      reservations:
-        cpus: '0.50' 
-        memory: '256M' 
-      limits:
-        cpus: '1.0' 
-        memory: '1G'
+#     deploy:
+#       resources:
+#         reservations:
+#           cpus: '0.25' # reservation minimale de CPU
+#           memory: '800M' # reservation minimale de memoir
+   
 
- # Mode Burstable ^ Pour les container bustabele,
- # L'orchestration de conteneurs permet de gérer des environnements
- # où plusieurs conteneurs doivent interagir. Cela peut inclure la mise à l'échelle automatique de conteneurs en fonction de la demande, la distribution de conteneurs sur plusieurs machines pour assurer la tolérance aux pannes, ou la gestion de la communication entre différents conteneurs. En bref, l'orchestration de conteneurs aide à automatiser et à
-  #simplifier de nombreux aspects de la gestion des conteneurs dans les environnements de production.
+#   frontend:
+#     build: 
+#       context: ./front
+#     container_name: frontend
+#     volumes:
+#       - ./front:/usr/src/app
+#     ports:
+#       - 5173:5173
+#     deploy:
+#       resources:
+#         limits:
+#           cpus: '0.10' # limit maximale de CPU
+#           memory: '512m'  # limit maximale de memoire\
+
+# volumes:
+#   backend:
+#   frontend:
+
+# # Mode Garantis  
+
+# # c'est lorsque la valeur minimale et la valeur maximale on le meme valeur
+#   deploy:
+#     resources:
+#       reservations:
+#         cpus: '0.50' 
+#         memory: '256M' 
+#       limits:
+#         cpus: '1.0' 
+#         memory: '1G'
+
+#  # Mode Burstable ^ Pour les container bustabele,
+#  # L'orchestration de conteneurs permet de gérer des environnements
+#  # où plusieurs conteneurs doivent interagir. Cela peut inclure la mise à l'échelle automatique de conteneurs en fonction de la demande, la distribution de conteneurs sur plusieurs machines pour assurer la tolérance aux pannes, ou la gestion de la communication entre différents conteneurs. En bref, l'orchestration de conteneurs aide à automatiser et à
+#   #simplifier de nombreux aspects de la gestion des conteneurs dans les environnements de production.
 
     
