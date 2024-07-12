@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { ENV } from './config/config.js'
 
 // Connexion MySQL
 import './models/index.js'
@@ -10,7 +11,7 @@ import routerLivre from './routes/livres.route.js'
 const app = express()
 
 // PORT
-const PORT = 8080
+const PORT = ENV.PORT
 
 
 // MIDDLEWARE
