@@ -1,16 +1,17 @@
 import { Sequelize } from "sequelize";
 import auteurModel from './auteur.model.js'
 import livreModel from "./livre.model.js";
+import { ENV } from '../config/config.js'
 
 // Nouvelle connexion à la DB
 const connection = new Sequelize(
-    'livres', // Nom de la base de donnée
-    'root', // identifiant Mysql
-    '', // Mot de passe Mysql
-    {
-        host: 'localhost', // URL de mySQL
-        dialect: 'mysql'
-    }
+  ENV.DB_NAME,
+  ENV.DB_USER,
+  ENV.DB_PASSWORD,
+  {
+      host: ENV.DB_HOST,
+      dialect: ENV.DB_DIALECT
+  }
 );
 
 try {
