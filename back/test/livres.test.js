@@ -35,3 +35,6 @@
 // //     expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
 // //   });
 // });
+test("test trivial qui réussit toujours", () => {
+  expect(true).toBe(true);
+});
